@@ -54,7 +54,7 @@ class MainScreen extends StatelessWidget {
     return SingleChildScrollView(
       child: Container(
         width: size.width,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             alignment: Alignment.topCenter,
             image: AssetImage(
@@ -66,7 +66,7 @@ class MainScreen extends StatelessWidget {
             future: SharedPreferences.getInstance(),
             builder: (context, snapshot) {
               if (snapshot.data == null) {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
@@ -75,7 +75,7 @@ class MainScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.only(left: 32, top: 65),
+                    padding: EdgeInsets.only(left: 10, top: 50),
                     child: Row(
                       children: [
                         Image.asset(
@@ -91,31 +91,53 @@ class MainScreen extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
-                              Container(
-                                padding: EdgeInsets.all(8.0),
-                                margin: EdgeInsets.only(left: 16, top: 0, right: 32), // Добавлен отступ справа
-                                decoration: BoxDecoration(
-                                  color: Colors.black.withOpacity(0.5), // Черная полупрозрачная плашка
-                                  borderRadius: BorderRadius.circular(4.0),
-                                ),
-                                child: Stack(
-                                  alignment: Alignment.centerLeft,
-                                  children: [
-                                    Icon(
-                                      Icons.account_circle, // Иконка профиля
+                              Padding(
+                                padding: EdgeInsets.only(left: 10, right: 10),
+                                child: RichText(
+                                  text: TextSpan(
+                                    text: "Привет, ",
+                                    style: textTheme.bodyLarge?.copyWith(
+                                      fontSize: 18,
                                       color: Colors.white,
-                                      size: 24.0,
                                     ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 32.0),
-                                      child: Text(
-                                        "Профиль",
-                                        style: textTheme.bodyLarge!.copyWith(fontSize: 14, color: Colors.white), // Текст белого цвета
+                                    children: [
+                                      TextSpan(
+                                        text: "${nick ?? "-"}!",
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.bold,
+                                          // Другие желаемые свойства стиля...
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
                               ),
+                              // Container(
+                              //   padding: EdgeInsets.all(8.0),
+                              //   margin: EdgeInsets.only(left: 16, top: 0, right: 32), // Добавлен отступ справа
+                              //   decoration: BoxDecoration(
+                              //     color: Colors.black.withOpacity(0.6), // Черная полупрозрачная плашка
+                              //     borderRadius: BorderRadius.circular(4.0),
+                              //   ),
+                              //   child: Stack(
+                              //     alignment: Alignment.centerLeft,
+                              //     children: [
+                              //       Icon(
+                              //         Icons.account_circle, // Иконка профиля
+                              //         color: Colors.white,
+                              //         size: 24.0,
+                              //       ),
+                              //       Padding(
+                              //         padding: const EdgeInsets.only(left: 32.0),
+                              //         child: Text(
+                              //           "Профиль",
+                              //           style: textTheme.bodyLarge!.copyWith(fontSize: 14, color: Colors.white), // Текст белого цвета
+                              //         ),
+                              //       ),
+                              //     ],
+                              //   ),
+                              // ),
                             ],
                           ),
                         ),
@@ -123,105 +145,176 @@ class MainScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    height: 16.0,
+                    height: 10.0,
                   ),
                   Padding(
-                    padding: EdgeInsets.only(left: 32),
-                    child: RichText(
-                      text: TextSpan(
-                        text: "Привет, ",
-                        style: textTheme.bodyLarge?.copyWith(fontSize: 24),
-                        children: [
-                          TextSpan(
-                            text: "${nick ?? "-"}!",
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                              // Другие желаемые свойства стиля...
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 42.0,
-                  ),
-                  BlocBuilder<QrBloc, QrState>(
-                    builder: (context, state) {
-                      if (state is QrInitial) {
-                        if (state.qr == null || state.qr == "") {
-                          return GestureDetector(
-                            onTap: () => Navigator.of(context).push(
-                              PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => QrViewScreeen(),
-                                transitionDuration: Duration(milliseconds: 370),
-                                transitionsBuilder: (_, a, __, c) =>
-                                    FadeTransition(opacity: a, child: c),
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.only(right: 30),
+                              decoration: BoxDecoration(
+                                  color: Colors.black.withOpacity(0.7),
+                                  borderRadius: BorderRadius.circular(8)),
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 4, horizontal: 8),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Мои коины",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Icon(
+                                          Icons.apple,
+                                          color: Colors.white,
+                                          size: 30,
+                                        ),
+                                        Text(
+                                          "10",
+                                          style: TextStyle(
+                                            fontSize: 30,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        )
+                                      ],
+                                    )
+                                  ],
+                                ),
                               ),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.end,
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.all(8.0),
-                                  margin: EdgeInsets.only(left: 32, bottom: 32),
-                                  decoration: BoxDecoration(
-                                    color: ColorsUI.lime,
-                                    borderRadius: BorderRadius.circular(4.0),
+                          ],
+                        ),
+                        BlocBuilder<QrBloc, QrState>(
+                          builder: (context, state) {
+                            if (state is QrInitial) {
+                              if (state.qr == null || state.qr == "") {
+                                return GestureDetector(
+                                  onTap: () => Navigator.of(context).push(
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          QrViewScreeen(),
+                                      transitionDuration:
+                                          Duration(milliseconds: 370),
+                                      transitionsBuilder: (_, a, __, c) =>
+                                          FadeTransition(opacity: a, child: c),
+                                    ),
                                   ),
-                                  child: Stack(
-                                    alignment: Alignment.centerLeft,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     children: [
-                                      Icon(
-                                        Icons.qr_code,
-                                        color: ColorsUI.black,
-                                        size: 24.0,
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 32.0),
-                                        child: Text(
-                                          "Отсканировать QR-код",
-                                          style: textTheme.bodyLarge!.copyWith(color: ColorsUI.black),
+                                      Container(
+                                        padding: EdgeInsets.all(5.0),
+                                        margin: EdgeInsets.only(
+                                            left: 10, bottom: 0),
+                                        decoration: BoxDecoration(
+                                          color: ColorsUI.lime,
+                                          borderRadius:
+                                              BorderRadius.circular(8),
+                                        ),
+                                        child: Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 0.0),
+                                                child: Text(
+                                                  "Отсканировать",
+                                                  style: textTheme.bodyLarge!
+                                                      .copyWith(
+                                                          color: ColorsUI.black,
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 16),
+                                                ),
+                                              ),
+                                              Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.qr_code,
+                                                    color: ColorsUI.black,
+                                                    size: 25.0,
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10.0),
+                                                    child: Text(
+                                                      "QR",
+                                                      style: textTheme
+                                                          .bodyLarge!
+                                                          .copyWith(
+                                                              color: ColorsUI
+                                                                  .black,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .bold,
+                                                              fontSize: 22),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
+                                );
+                              }
+                              return GestureDetector(
+                                onTap: () => (
+                                  Navigator.of(context).push(
+                                    PageRouteBuilder(
+                                      pageBuilder: (_, __, ___) =>
+                                          QrViewScreeen(),
+                                      transitionDuration:
+                                          Duration(milliseconds: 370),
+                                      transitionsBuilder: (_, a, __, c) =>
+                                          FadeTransition(opacity: a, child: c),
+                                    ),
+                                  ),
                                 ),
-                              ],
-                            ),
-                          );
-                        }
-                        return GestureDetector(
-                          onTap: () => (
-                            Navigator.of(context).push(
-                              PageRouteBuilder(
-                                pageBuilder: (_, __, ___) => QrViewScreeen(),
-                                transitionDuration: Duration(milliseconds: 370),
-                                transitionsBuilder: (_, a, __, c) =>
-                                    FadeTransition(opacity: a, child: c),
-                              ),
-                            ),
-                          ),
-                          child: QrImageView(
-                            size: size.width * 0.2,
-                            data: state.qr!,
-                            backgroundColor: Colors.white,
-                          ),
-                        );
-                      } else {
-                        return SizedBox();
-                      }
-                    },
+                                child: QrImageView(
+                                  size: size.width * 0.2,
+                                  data: state.qr!,
+                                  backgroundColor: Colors.white,
+                                ),
+                              );
+                            } else {
+                              return SizedBox();
+                            }
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10.0,
                   ),
                   Container(
-                    width: size.width,
+                    width: double.infinity,
                     padding:
-                        EdgeInsets.symmetric(horizontal: 32, vertical: 24.0),
+                        EdgeInsets.symmetric(horizontal: 0, vertical: 25.0),
                     decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius:
-                            BorderRadius.vertical(top: Radius.circular(32.0))),
+                            BorderRadius.vertical(top: Radius.circular(25.0))),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -240,174 +333,206 @@ class MainScreen extends StatelessWidget {
                                     FadeTransition(opacity: a, child: c),
                               ),
                             ),
-                            child: ListView(
+                            child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              children: [
-                                Container(
-                                  margin: EdgeInsets.only(right: 4.0), // Отступ до следующего контейнера
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    border: Border.all(
-                                      color: ColorsUI.lime,
-                                      width: 3.0, // Увеличенная толщина обводки
-                                    ),
+                              
+                              itemCount: 10,
+                              itemBuilder: (context, index) {
+                                
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                                  child: Column(
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(40),
+                                          border: Border.all(
+                                            color: Colors.pink.withOpacity(0.7),
+                                            width:
+                                                3.0, // Увеличенная толщина обводки
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(2),
+                                          child: CircleAvatar(
+                                            child: Container(),
+                                            maxRadius: 35,
+                                            backgroundImage: AssetImage(
+                                                "asset/images/almaty.jpg"),
+                                          ),
+                                        ),
+                                      ),
+                                      Text(
+                                        'Алматы 1',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500),
+                                      ),
+                                    ],
                                   ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(1.0), // Добавлен внутренний отступ
-                                    child: StoryWidgetContainer(
-                                      text: " Алматы 1 ",
-                                      assetPath: 'asset/images/almaty.jpg',
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 4.0),
-                                Container(
-                                  margin: EdgeInsets.only(right: 4.0),
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(8.0),
-                                    border: Border.all(
-                                      color: ColorsUI.lime,
-                                      width: 3.0,
-                                    ),
-                                  ),
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(1.0),
-                                    child: StoryWidgetContainer(
-                                      text: " Алматы 2 ",
-                                      assetPath: 'asset/images/almaty2.jpg',
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 8.0),
-                              ],
+                                );
+                              },
                             ),
                           ),
                         ),
                         SizedBox(
-                          height: 24.0,
+                          height: 0.0,
                         ),
-                        Text(
-                          "Новости стартапа",
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    color: ColorsUI.black,
-                                    fontSize: 20,
-                                  ),
+                       Container(
+                        padding: EdgeInsets.symmetric(horizontal: 6),
+                        decoration: BoxDecoration(
+                          color: Colors.grey.shade100
                         ),
-                        SizedBox(
-                          height: 20.0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                         child: Padding(
+                           padding: const EdgeInsets.all(8.0),
+                           child: Column(
                             children: [
-                              GestureDetector(
-                                onTap: () {
-                                  newsCallback();
-                                },
-                                child: Text(
-                                  "См. все >",
-                                  style: textTheme.bodyMedium!
-                                      .copyWith(color: Colors.black),
+                               Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  "Новости стартапа",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodyLarge!
+                                      .copyWith(
+                                          color: ColorsUI.black,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500),
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: size.height * 0.1,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            children: [
-                              NewsWidget(
-                                text: " Новость 1 "),
-                              SizedBox(
-                                width: 8.0,
-                              ),
-                              NewsWidget(text: " Новость 2 "),
-                              SizedBox(
-                                width: 8.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 24.0,
-                        ),
-                        Text(
-                          "Партнеры",
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    color: ColorsUI.black,
-                                    fontSize: 20,
+                                GestureDetector(
+                                  onTap: () {
+                                    newsCallback();
+                                  },
+                                  child: Text(
+                                    "См. все >",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
                                   ),
-                        ),
-                        SizedBox(
-                          height: 16.0,
-                        ),
-                        SizedBox(
-                          height: size.width * 0.2,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            children: [
-                              PartnerWidget(text: "Партнер 1"),
-                              SizedBox(
-                                width: 8.0,
-                              ),
-                              PartnerWidget(text: "Партнер 2"),
-                              SizedBox(
-                                width: 8.0,
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 24.0,
-                        ),
-                        Text(
-                          "Достопримечательности и места",
-                          style:
-                              Theme.of(context).textTheme.bodyLarge!.copyWith(
-                                    color: ColorsUI.black,
-                                    fontSize: 20,
-                                  ),
-                        ),
-                        SizedBox(
-                          height: 20.0,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  placesCallback();
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            SizedBox(
+                              height: 130,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 10,
+                                itemBuilder: (context, index) {
+                                  return NewsWidget(text: " Новость 1");
                                 },
-                                child: Text(
-                                  "См. все >",
-                                  style: textTheme.bodyMedium!
-                                      .copyWith(color: Colors.black),
+                              ),
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Container(
+                              decoration: BoxDecoration(
+                          color: Colors.grey.shade100
+                        ),
+                              child: Column(
+                                children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Партнеры",
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge!
+                                        .copyWith(
+                                            color: ColorsUI.black,
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w500),
+                                  ),
+                                  GestureDetector(
+                                    onTap: () {
+                                      newsCallback();
+                                    },
+                                    child: Text(
+                                      "См. все >",
+                                      style: TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 10.0,
+                              ),
+                              SizedBox(
+                                height: 130,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemCount: 10,
+                                  itemBuilder: (context, index) {
+                                    return PartnerWidget(text: "Партнер 1");
+                                  },
                                 ),
-                              )
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: size.width * 0.2,
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            shrinkWrap: true,
-                            children: [
-                              NewsWidget(text: " Место 1 "),
-                              SizedBox(
-                                width: 8.0,
                               ),
-                              NewsWidget(text: " Место 2 "),
-                              SizedBox(
-                                width: 8.0,
+                                ],
                               ),
+                            ),
+                            
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Text(
+                                      "Достопримечательности ",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyLarge!
+                                          .copyWith(
+                                              color: ColorsUI.black,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w500),
+                                    ),
+                                    Icon(Icons.location_on_sharp),
+                                  ],
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    placesCallback();
+                                    ;
+                                  },
+                                  child: Text(
+                                    "См. все >",
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 10.0,
+                            ),
+                            SizedBox(
+                              height: 130,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: 10,
+                                itemBuilder: (context, index) {
+                                  return NewsWidget(text: " Место 1 ");
+                                },
+                              ),
+                            ),
                             ],
-                          ),
-                        ),
+                           ),
+                         ),
+                       )
                       ],
                     ),
                   )

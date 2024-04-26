@@ -9,24 +9,41 @@ class PartnerWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Container(
-      height: size.width * 0.25,
-      width: size.width * 0.25,
-      decoration: BoxDecoration(
-        color: ColorsUI.lime,
-        borderRadius: BorderRadius.circular(2.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.end,
-        children: [
-          Text(
-            text,
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium!
-                .copyWith(color: ColorsUI.black),
-          )
-        ],
+    return Padding(
+      padding: const EdgeInsets.only(right: 6),
+      child: Container(
+        height: size.width * 0.30,
+        width: size.width * 0.30,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage(
+                "asset/images/almaty2.jpg",
+              ),
+              fit: BoxFit.cover),
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.6),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  text,
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium!
+                      .copyWith(color: ColorsUI.white),
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

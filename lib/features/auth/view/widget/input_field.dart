@@ -74,7 +74,7 @@ class InputField extends StatelessWidget {
             borderRadius: BorderRadius.all(Radius.circular(12.0)),
           ),
           hintText: hintText,
-          hintStyle: textTheme.bodyMedium,
+          hintStyle: TextStyle(fontSize: 14, color: Colors.white),
         ),
       ),
     );

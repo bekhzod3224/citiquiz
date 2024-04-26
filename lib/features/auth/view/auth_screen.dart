@@ -71,7 +71,7 @@ class _AuthScreenState extends State<AuthScreen> {
                   ),
                   AutoSizeText(
                     'Авторизация',
-                    style: textTheme.titleMedium,
+                    style: TextStyle(color: Colors.white),
                   ),
                   SizedBox(
                     height: size.height * 0.08,
@@ -84,9 +84,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         }),
                         child: AutoSizeText(
                           'Вход',
-                          style: isLogIn == false
-                              ? textTheme.bodyMedium!.copyWith(fontSize: 24)
-                              : textTheme.bodyLarge!.copyWith(fontSize: 24),
+                          style: TextStyle(color: Colors.white, fontSize: 22),
                         ),
                       ),
                       const SizedBox(
@@ -98,9 +96,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         }),
                         child: AutoSizeText(
                           'Регистрация',
-                          style: isLogIn == true
-                              ? textTheme.bodyMedium!.copyWith(fontSize: 24)
-                              : textTheme.bodyLarge!.copyWith(fontSize: 24),
+                          style: TextStyle(color: Colors.white, fontSize: 22),
                         ),
                       ),
                     ],
@@ -139,11 +135,11 @@ class _AuthScreenState extends State<AuthScreen> {
                             isLogIn == false
                                 ? 'Есть аккаунт? '
                                 : 'Нет аккаунта? ',
-                            style: textTheme.bodyMedium,
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           AutoSizeText(
                             isLogIn == false ? 'Войти' : 'Зарегистрироваться',
-                            style: textTheme.bodyLarge,
+                            style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),

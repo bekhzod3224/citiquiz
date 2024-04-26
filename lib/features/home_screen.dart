@@ -24,8 +24,10 @@ getAppbarTitle(int index) {
     case 1:
       return "Новости";
     case 2:
-      return "Места";
+      return "Категория";
     case 3:
+      return "Места";
+    case 4:
       return "Профиль";
     default:
       return "";
@@ -59,7 +61,8 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
       NewsScreen(),
-      const PlacesScreen(),
+      const PlayScreen(),
+      const ProfilScreen(),
       const ProfilScreen(),
     ];
   }
@@ -82,43 +85,43 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            isGameSelected = true;
-          });
-          Navigator.of(context).push(
-            PageRouteBuilder(
-              pageBuilder: (_, __, ___) => const PlayScreen(),
-              transitionDuration: const Duration(milliseconds: 370),
-              transitionsBuilder: (_, a, __, c) =>
-                  FadeTransition(opacity: a, child: c),
-            ),
-          );
-        },
-        backgroundColor: ColorsUI.lime,
-        shape: const CircleBorder(),
-        child: Padding(
-          padding: const EdgeInsets.all(6.0),
-          child: SvgPicture.asset(
-            "asset/icons/game_outline.svg",
-            colorFilter: (isGameSelected)
-                ? const ColorFilter.mode(
-                    ColorsUI.lime,
-                    BlendMode.srcIn,
-                  )
-                : const ColorFilter.mode(
-                    ColorsUI.black,
-                    BlendMode.srcIn,
-                  ),
-          ),
-        ),
-      ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () {
+      //     setState(() {
+      //       isGameSelected = true;
+      //     });
+      //     Navigator.of(context).push(
+      //       PageRouteBuilder(
+      //         pageBuilder: (_, __, ___) => const PlayScreen(),
+      //         transitionDuration: const Duration(milliseconds: 370),
+      //         transitionsBuilder: (_, a, __, c) =>
+      //             FadeTransition(opacity: a, child: c),
+      //       ),
+      //     );
+      //   },
+      //   backgroundColor: ColorsUI.lime,
+      //   shape: const CircleBorder(),
+      //   child: Padding(
+      //     padding: const EdgeInsets.all(6.0),
+      //     child: SvgPicture.asset(
+      //       "asset/icons/game_outline.svg",
+      //       colorFilter: (isGameSelected)
+      //           ? const ColorFilter.mode(
+      //               ColorsUI.lime,
+      //               BlendMode.srcIn,
+      //             )
+      //           : const ColorFilter.mode(
+      //               ColorsUI.black,
+      //               BlendMode.srcIn,
+      //             ),
+      //     ),
+      //   ),
+      // ),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         currentIndex: navIndex,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.white,
         onTap: (value) {
           setState(() {
             navIndex = value;
@@ -145,10 +148,19 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: Padding(
               padding: EdgeInsets.only(left: 8.0),
               child: Icon(
+                Icons.timer,
+              ),
+            ),
+            label: 'Играть',
+          ),
+          BottomNavigationBarItem(
+            icon: Padding(
+              padding: EdgeInsets.only(left: 8.0),
+              child: Icon(
                 Icons.location_on,
               ),
             ),
-            label: '  Места',
+            label: 'Места',
           ),
           BottomNavigationBarItem(
             icon: Icon(

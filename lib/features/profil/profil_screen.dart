@@ -2,7 +2,9 @@ import 'package:citiquiz/features/auth/view/auth_screen.dart';
 import 'package:citiquiz/features/auth/view/bloc/authentication_bloc.dart';
 import 'package:citiquiz/features/core/colors.dart';
 import 'package:citiquiz/features/support/support_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -30,188 +32,208 @@ class ProfilScreen extends StatelessWidget {
               email = state.email;
             }
             String? nick = snapshot.data!.getString('nick');
-            return Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(32.0),
-                  color: Colors.white,
-                  child: SizedBox(
-                    height: size.height * 0.17,
-                    width: size.width,
-                    child: Stack(
-                      fit: StackFit.expand,
-                      children: [
-                        Positioned(
-                          bottom: 0,
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Stack(
+                    children: [
+                      Positioned(
+                          top: 45,
                           child: Container(
-                            height: size.height * 0.13,
-                            width: size.width,
-                            decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(4.0)),
-                              color: ColorsUI.grey.withOpacity(0.25),
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          top: 0,
-                          left: 16,
-                          child: Container(
-                            width: size.width * 0.14,
-                            height: size.width * 0.14,
-                            decoration: BoxDecoration(
-                              color: Color.fromARGB(179, 141, 254, 29),
-                              shape: BoxShape.circle,
-                              border: Border.all(
-                                width: 5.0,
-                                color: Colors.white,
-                              ),
-                            ),
-                            child: Icon(
-                              Icons.person,
-                              color: Colors.white,
-                              size: size.width * 0.1,
-                            ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 10,
-                          left: 19,
-                          child: Column(
-                            children: [
-                              Container(
-                                width: 0.4 * size.width,
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 4.0, horizontal: 10.0),
-                                decoration: const BoxDecoration(
-                                  color: Color.fromRGBO(112, 195, 22, 1),
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(8.0),
+                            width: MediaQuery.of(context).size.width,
+                            height: MediaQuery.of(context).size.height,
+                            decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2), borderRadius: BorderRadius.circular(8)),
+                          )),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 10),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 20, right: 5),
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                            color: Colors.white,
+                                            borderRadius: BorderRadius.circular(8)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 6,
+                                          ),
+                                          child: SizedBox(
+                                              width: 70,
+                                              height: 70,
+                                              child: Image.asset(
+                                                  "asset/images/almaty2.jpg")),
+                                        ),
+                                      ),
+                                    ),
+                                     Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                      children: [
+                                        Text("Alexander", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                        Text("s", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),),
+                                      ],
+                                    ),
+                                    SizedBox(height: 5,),
+                                    Text("игрок", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                                  ],
+                                )
+                                  ],
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 5),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    
+                                    children: [
+                                      Container(
+                                        decoration: BoxDecoration(
+                                    color: Colors.green,
+                                    borderRadius: BorderRadius.circular(5)),
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(horizontal: 5),
+                                          child: Row(
+                                            children: [
+                                              Icon(
+                                                Icons.apple,
+                                                color: Colors.white,
+                                                size: 16,
+                                              ),
+                                              Text(
+                                                "100",
+                                                style: TextStyle(
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w300,
+                                                  color: Colors.white,
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(height: 5,),
+                                      Container(
+                                        decoration: BoxDecoration(color: Colors.grey.withOpacity(0.3), borderRadius: BorderRadius.circular(4)),
+                                        child: Text("изменить информацию", style: TextStyle(fontSize: 12, fontWeight: FontWeight.w500),)),
+                                    ],
                                   ),
-                                ),
-                                child: Text(
-                                  nick ?? "-",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                          color: ColorsUI.black, fontSize: 16),
-                                ),
-                              ),
-                              const SizedBox(
-                                height: 12.0,
-                              ),
-                              Container(
-                                width: 0.4 * size.width,
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 4.0, horizontal: 10.0),
-                                decoration: const BoxDecoration(
-                                    color: Color.fromRGBO(112, 195, 22, 1),
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8.0))),
-                                child: Text(
-                                  email ?? "-",
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodyMedium!
-                                      .copyWith(
-                                          color: ColorsUI.black, fontSize: 16),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        Positioned(
-                          top: size.height * 0.04 + 12.0,
-                          right: 14.0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.grey.shade600,
-                                borderRadius: const BorderRadius.all(
-                                    Radius.circular(4.0))),
-                            padding:
-                                const EdgeInsets.symmetric(horizontal: 10.0),
-                            child: const Center(
-                              child: Text(
-                                "User",
-                                style: TextStyle(
-                                    fontSize: 12.0, color: Colors.white),
-                              ),
+                                )
+                              ],
                             ),
-                          ),
-                        ),
-                        Positioned(
-                          bottom: 12.0,
-                          right: 14.0,
-                          child: GestureDetector(
-                            onTap: () => Navigator.of(context).push(
-                              PageRouteBuilder(
-                                pageBuilder: (_, __, ___) =>
-                                    const SupportScreen(),
-                                transitionDuration:
-                                    const Duration(milliseconds: 370),
-                                transitionsBuilder: (_, a, __, c) =>
-                                    FadeTransition(opacity: a, child: c),
-                              ),
+                            Column(
+                              children: [
+                                title(
+                                    "Магазин", Icon(Icons.shopping_bag_rounded)),
+                                title("Новости", Icon(Icons.newspaper)),
+                                title("Достопримечательности",
+                                    Icon(Icons.location_on)),
+                                title("Партнеры",
+                                    Icon(Icons.person_pin_circle_rounded)),
+                                title("О нас", Icon(Icons.error)),
+                              ],
                             ),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: ColorsUI.yellow,
-                                  borderRadius: const BorderRadius.all(
-                                      Radius.circular(4.0))),
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: const Center(
-                                child: Text(
-                                  "Связаться",
-                                  style: TextStyle(
-                                      fontSize: 14.0, color: Colors.black),
-                                ),
-                              ),
-                            ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 16.0,
-                ),
-                GestureDetector(
-                  onTap: () {
-                    BlocProvider.of<AuthenticationBloc>(context).add(LogOut());
-                    Navigator.of(context).pushReplacement(
-                      PageRouteBuilder(
-                        pageBuilder: (_, __, ___) => const AuthScreen(),
-                        transitionDuration: const Duration(milliseconds: 370),
-                        transitionsBuilder: (_, a, __, c) =>
-                            FadeTransition(opacity: a, child: c),
                       ),
-                    );
-                  },
-                  child: Container(
+                    ],
+                  ),
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
                     margin: EdgeInsets.symmetric(horizontal: 32.0),
                     padding:
                         EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
                     width: size.width,
                     decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 255, 54, 54),
+                      color: Colors.green,
                       borderRadius: BorderRadius.circular(12.0),
                     ),
-                    child: Center(
-                      child: Text(
-                        "Выход",
-                        style: TextStyle(fontSize: 20.0, color: Colors.white),
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.qr_code,
+                          color: ColorsUI.white,
+                          size: 25.0,
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Center(
+                          child: Text(
+                            "Отсканировать QR-код",
+                            style:
+                                TextStyle(fontSize: 20.0, color: Colors.white),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 16.0,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      BlocProvider.of<AuthenticationBloc>(context)
+                          .add(LogOut());
+                      Navigator.of(context).pushReplacement(
+                        PageRouteBuilder(
+                          pageBuilder: (_, __, ___) => const AuthScreen(),
+                          transitionDuration: const Duration(milliseconds: 370),
+                          transitionsBuilder: (_, a, __, c) =>
+                              FadeTransition(opacity: a, child: c),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      margin: EdgeInsets.symmetric(horizontal: 32.0),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+                      width: size.width,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 255, 54, 54),
+                        borderRadius: BorderRadius.circular(12.0),
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Выход",
+                          style: TextStyle(fontSize: 20.0, color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           },
         );
       },
+    );
+  }
+
+  Widget title(String name, Icon icon) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListTile(
+          leading: icon,
+          title: Text(
+            name,
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
+          ),
+        ),
+       
+      ],
     );
   }
 }
