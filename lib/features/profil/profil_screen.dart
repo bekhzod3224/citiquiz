@@ -1,6 +1,7 @@
 import 'package:citiquiz/features/auth/view/auth_screen.dart';
 import 'package:citiquiz/features/auth/view/bloc/authentication_bloc.dart';
 import 'package:citiquiz/features/core/colors.dart';
+import 'package:citiquiz/features/profil/screens/shop-screen/shop-screen.dart';
 import 'package:citiquiz/features/support/support_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -132,8 +133,15 @@ class ProfilScreen extends StatelessWidget {
                             ),
                             Column(
                               children: [
-                                title(
-                                    "Магазин", Icon(Icons.shopping_bag_rounded)),
+                                InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context){
+                                      return ShopScreen();
+                                    }));
+                                  },
+                                  child: title(
+                                      "Магазин", Icon(Icons.shopping_bag_rounded)),
+                                ),
                                 title("Новости", Icon(Icons.newspaper)),
                                 title("Достопримечательности",
                                     Icon(Icons.location_on)),
