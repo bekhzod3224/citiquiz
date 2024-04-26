@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       NewsScreen(),
       const PlayScreen(),
-      const ProfilScreen(),
+      const PlacesScreen(),
       const ProfilScreen(),
     ];
   }
